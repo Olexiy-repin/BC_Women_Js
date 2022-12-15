@@ -9,8 +9,18 @@
 /*
 ? Знайдіть перше непарне число
 */
+// Повна версія
 // const numbers = [2, 1, 6, 8, 9, 10, 12];
-// const oddNumber = null;
+// const oddNumber = numbers.find((el, idx, arr) => {
+//   return el % 2 !== 0;
+// });
+
+// console.log('numbers: ', numbers);
+// console.log('oddNumber: ', oddNumber);
+
+// Скорочена версія
+// const numbers = [2, 1, 6, 8, 9, 10, 12];
+// const oddNumber = numbers.find(el => el % 2 !== 0);
 
 // console.log('numbers: ', numbers);
 // console.log('oddNumber: ', oddNumber);
@@ -30,6 +40,19 @@
 //   { make: 'Ford', model: 'Fusion', type: 'sedan', amount: 13, price: 22120, onSale: true },
 //   { make: 'Ford', model: 'Explorer', type: 'suv', amount: 6, price: 31660, onSale: false },
 // ];
+
+// Повна версія
+// const getCarByModel = (allCars, model) => {
+//   return allCars.find((el, idx, arr) => {
+//     return el.model === model;
+//   });
+// };
+
+// console.log(getCarByModel(cars, 'F-150'));
+// console.log(getCarByModel(cars, 'CX-9'));
+
+// Скорочена версія
+// const getCarByModel = (allCars, model) => allCars.find(el => el.model === model);
 
 // console.log(getCarByModel(cars, 'F-150'));
 // console.log(getCarByModel(cars, 'CX-9'));

@@ -9,8 +9,18 @@
 /*
 ? Відфільтруйте масив, щоб залишилися тільки парні
 */
+// Повна версія
 // const numbers = [1, 2, 3, 4, 5, 6];
-// const evenNumbers = null;
+// const evenNumbers = numbers.filter((el, idx, arr) => {
+//   return el % 2 === 0;
+// });
+
+// console.log('numbers: ', numbers);
+// console.log('evenNumbers: ', evenNumbers);
+
+// Скорочена версія
+// const numbers = [1, 2, 3, 4, 5, 6];
+// const evenNumbers = numbers.filter(el => el % 2 === 0);
 
 // console.log('numbers: ', numbers);
 // console.log('evenNumbers: ', evenNumbers);
@@ -18,8 +28,18 @@
 /*
 ? Відфільтруємо масив, залишивши в ньому лише позитивні числа:
 */
+// Повна версія
 // const numbers = [-2, 5, 1, -5, -1, 1, 0, 3, 4, -1];
-// const positiveNumbers = null;
+// const positiveNumbers = numbers.filter((el, idx, arr) => {
+//   return el >= 0;
+// });
+
+// console.log('numbers: ', numbers);
+// console.log('positiveNumbers: ', positiveNumbers);
+
+// Скорочена версія
+// const numbers = [-2, 5, 1, -5, -1, 1, 0, 3, 4, -1];
+// const positiveNumbers = numbers.filter(el => el >= 0);
 
 // console.log('numbers: ', numbers);
 // console.log('positiveNumbers: ', positiveNumbers);
@@ -27,6 +47,7 @@
 /*
 ? Відфільтруйте масив heroes за властивістю об'єкта franchise.
 */
+// Повна версія
 // const heroes = [
 //   { name: 'Batman', franchise: 'DC' },
 //   { name: 'Ironman', franchise: 'Marvel' },
@@ -34,12 +55,31 @@
 //   { name: 'Superman', franchise: 'DC' },
 // ];
 
-// const marvelHeroes = null;
-// const dcHeroes = null;
+// const marvelHeroes = heroes.filter((el, idx, arr) => {
+//   return el.franchise === 'Marvel';
+// });
+// const dcHeroes = heroes.filter((el, idx, arr) => {
+//   return el.franchise === 'DC';
+// });
 
-// console.log('heroes: ', heroes);
-// console.log('marvelHeroes: ', marvelHeroes);
-// console.log('dcHeroes: ', dcHeroes);
+// console.table(heroes);
+// console.table(marvelHeroes);
+// console.table(dcHeroes);
+
+// Скорочена версія
+// const heroes = [
+//   { name: 'Batman', franchise: 'DC' },
+//   { name: 'Ironman', franchise: 'Marvel' },
+//   { name: 'Thor', franchise: 'Marvel' },
+//   { name: 'Superman', franchise: 'DC' },
+// ];
+
+// const marvelHeroes = heroes.filter(el => el.franchise === 'Marvel');
+// const dcHeroes = heroes.filter(el => el.franchise === 'DC');
+
+// console.table(heroes);
+// console.table(marvelHeroes);
+// console.table(dcHeroes);
 
 /*
 ? Нехай функція filterByPrice повертає масив автомобілів ціна яких
@@ -58,12 +98,36 @@
 //   { make: 'Ford', model: 'Explorer', type: 'suv', amount: 6, price: 31660, onSale: false },
 // ];
 
+// Повна версія
+// const filterByPrice = (allCars, threshold) => {
+//   return allCars.filter((el, idx, arr) => {
+//     return el.price <= threshold;
+//   });
+// };
+
+// console.table(filterByPrice(cars, 25000));
+// console.table(filterByPrice(cars, 30000));
+
+// Скорочена версія
+// const filterByPrice = (allCars, threshold) => allCars.filter(el => el.price <= threshold);
+
 // console.table(filterByPrice(cars, 25000));
 // console.table(filterByPrice(cars, 30000));
 
 /*
 ? Нехай функція getCarsWithDiscount повертає масив автомобілів властивість onSale яких true.
 */
+// Повна версія
+// const getCarsWithDiscount = allCars => {
+//   return allCars.filter((el, idx, arr) => {
+//     return el.onSale;
+//   });
+// };
+
+// console.table(getCarsWithDiscount(cars));
+
+// Скорочена версія
+// const getCarsWithDiscount = allCars => allCars.filter(el => el.onSale);
 
 // console.table(getCarsWithDiscount(cars));
 
@@ -71,6 +135,19 @@
 ? Нехай функція getCarsWithType повертає масив автомобілів, тип яких
 ? збігається із значенням параметра type.
 */
+// Повна версія
+// const getCarsWithType = (allCars, type) => {
+//   return allCars.filter((el, idx, arr) => {
+//     return el.type === type;
+//   });
+// };
+
+// console.table(getCarsWithType(cars, 'suv'));
+// console.table(getCarsWithType(cars, 'sedan'));
+// console.table(getCarsWithType(cars, 'truck'));
+
+// Скорочена версія
+// const getCarsWithType = (allCars, type) => allCars.filter(el => el.type === type);
 
 // console.table(getCarsWithType(cars, 'suv'));
 // console.table(getCarsWithType(cars, 'sedan'));
