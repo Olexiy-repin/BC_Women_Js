@@ -1,0 +1,31 @@
+{
+  "name": "bc_women_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "autoprefixer": "npx postcss src/css/styles.css --use autoprefixer -d build/css",
+    "babel": "babel src/js/index.js -d build/js/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Olexiy-repin/BC_Women_Js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Olexiy-repin/BC_Women_Js/issues"
+  },
+  "homepage": "https://github.com/Olexiy-repin/BC_Women_Js#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.20",
+    "postcss-cli": "^10.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.7",
+    "@babel/preset-env": "^7.20.2"
+  }
+}
