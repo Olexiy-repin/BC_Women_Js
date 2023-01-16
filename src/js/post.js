@@ -5,21 +5,19 @@
 // const BASE_URL = 'http://localhost:3000';
 
 // const createUser = userInfo => {
-//   const options = {
+//   return fetch(`${BASE_URL}/users`, {
 //     method: 'POST',
 //     body: JSON.stringify(userInfo),
 //     headers: {
 //       'Content-Type': 'application/json',
 //     },
-//   };
-
-//   return fetch(`${BASE_URL}/users`, options).then(response => {
+//   }).then(response => {
 //     if (!response.ok) {
 //       throw new Error(response.status);
 //     }
 
 //     return response.json();
-//   });
+//   })
 // };
 
 // createUser({

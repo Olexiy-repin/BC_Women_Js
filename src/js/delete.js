@@ -5,11 +5,9 @@
 const BASE_URL = 'http://localhost:3000';
 
 const deleteUserById = userId => {
-  const options = {
+  return fetch(`${BASE_URL}/users/${userId}`, {
     method: 'DELETE',
-  };
-
-  return fetch(`${BASE_URL}/users/${userId}`, options).then(response => {
+  }).then(response => {
     if (!response.ok) {
       throw new Error(response.status);
     }

@@ -1,77 +1,84 @@
 // https://unsplash.com/
-import { UnsplashApi } from './unsplash-api';
-import createGalleryCards from '../templates/gallery-card.hbs';
+import { UnsplashAPI } from './unsplash-api.js';
+import { createGalleryCards } from './templates/gallery-cards.js';
 
 const searchFormEl = document.querySelector('.js-search-form');
 const galleryListEl = document.querySelector('.js-gallery');
 const loadMoreBtnEl = document.querySelector('.js-load-more');
+const searchBtnEl = document.querySelector('.js-search-btn');
 
-const unsplashApi = new UnsplashApi();
+const unsplashAPI = new UnsplashAPI();
 
-const paintRandomPhotosByPageLoad = () => {
-  unsplashApi
-    .fetchRandomPhotos()
-    .then(response => {
-      const { data } = response;
+unsplashAPI
+  .fetchRandomPhotos()
+  .then(({ data }) => {
+    galleryListEl.innerHTML = createGalleryCards(data);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
-      galleryListEl.innerHTML = createGalleryCards(data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
-
-paintRandomPhotosByPageLoad();
-
-const onLoadMoreBtnElClick = event => {
-  unsplashApi.page += 1;
-
-  unsplashApi
-    .fetchPhotosByQuery()
-    .then(response => {
-      const { data } = response;
-
-      galleryListEl.insertAdjacentHTML('beforeend', createGalleryCards(data.results));
-
-      if (data.total_pages === unsplashApi.page) {
-        loadMoreBtnEl.classList.add('is-hidden');
-        loadMoreBtnEl.removeEventListener('click', onLoadMoreBtnElClick);
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
-
-const onSearchFormElSubmit = event => {
+const onSearchFormSubmit = event => {
   event.preventDefault();
 
-  unsplashApi.searchQuery = event.currentTarget.elements.user_search_query.value;
-  unsplashApi.page = 1;
+  searchBtnEl.disabled = true;
+  searchBtnEl.classList.add('disabled');
 
-  unsplashApi
+  unsplashAPI.query = event.target.elements.user_search_query.value;
+  unsplashAPI.page = 1;
+
+  unsplashAPI
     .fetchPhotosByQuery()
-    .then(response => {
-      console.log(response);
-      const { data } = response;
+    .then(({ data }) => {
+      if (data.results.length === 0) {
+        alert('За вашим запитом нічого не знайдено');
+        event.target.reset();
+        galleryListEl.innerHTML = '';
 
-      if (data.total_pages === 0) {
         return;
       }
 
-      if (data.total_pages === 1) {
-        galleryListEl.innerHTML = createGalleryCards(data.results);
-
-        return;
+      if (data.total_pages > 1) {
+        loadMoreBtnEl.classList.remove('is-hidden');
       }
 
       galleryListEl.innerHTML = createGalleryCards(data.results);
-      loadMoreBtnEl.classList.remove('is-hidden');
-      loadMoreBtnEl.addEventListener('click', onLoadMoreBtnElClick);
     })
     .catch(err => {
       console.log(err);
+    })
+    .finally(() => {
+      searchBtnEl.disabled = false;
+      searchBtnEl.classList.remove('disabled');
     });
 };
 
-searchFormEl.addEventListener('submit', onSearchFormElSubmit);
+const onLoadMoreBtnClick = event => {
+  event.target.disabled = true;
+  event.target.classList.add('disabled');
+
+  unsplashAPI.page += 1;
+
+  unsplashAPI
+    .fetchPhotosByQuery()
+    .then(({ data }) => {
+      galleryListEl.insertAdjacentHTML(
+        'beforeend',
+        createGalleryCards(data.results)
+      );
+
+      if (data.total_pages === unsplashAPI.page) {
+        loadMoreBtnEl.classList.add('is-hidden');
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    .finally(() => {
+      event.target.disabled = false;
+      event.target.classList.remove('disabled');
+    });
+};
+
+searchFormEl.addEventListener('submit', onSearchFormSubmit);
+loadMoreBtnEl.addEventListener('click', onLoadMoreBtnClick);
